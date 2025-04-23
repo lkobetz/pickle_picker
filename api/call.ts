@@ -1,6 +1,6 @@
 import axios from "axios";
 import apiKey from "@/secrets";
-import { initialResponseData, IResponseData } from "@/app/types/types";
+import { initialResponseData, IResponseData } from "../types/types";
 
 export const callApi = async (input: string, page: number, perPage: number): Promise<IResponseData> => {
   ;

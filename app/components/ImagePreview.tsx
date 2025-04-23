@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { Image, TouchableOpacity, StyleSheet } from "react-native";
-import { IItem } from "@/app/types/types";
+import { IItem } from "@/types/types";
 
 export default function ImagePreview({ item }: PropsWithChildren & { item: IItem }): React.ReactElement {
 

@@ -1,4 +1,4 @@
-import { IDimensions, IItem } from '@/app/types/types'
+import { IDimensions, IItem } from '@/types/types'
 
 export const SET_PER_PAGE = "SET_PER_PAGE";
 export const SET_TOTAL = "SET_TOTAL";
