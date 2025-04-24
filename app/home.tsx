@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   StyleSheet,
@@ -14,33 +14,22 @@ import {
   setError,
   setImages,
   newSearch,
-  incrementPage,
 } from "@/store/actions";
 import ImagesLayout from "@/app/components/ImagesLayout";
-import { callApi } from "@/api/call";
+import { useCallAPI } from "@/api/call";
 import { IResponseData } from "../types/types";
 import { IState } from "../store/reducer";
 
 export default function HomeScreen(): React.ReactElement {
   const [searchInput, setSearchInput] = useState<string>('');
-  const page = useSelector((state: IState) => state.page);
-  const perPage = useSelector((state: IState) => state.perPage);
   const error = useSelector((state: IState) => state.error);
   const total = useSelector((state: IState) => state.total);
   const dispatch = useDispatch();
+  const { callAPI } = useCallAPI()
 
-  async function fetchData() {
-    const results = await callApi(
-      searchInput,
-      page,
-      perPage
-    );
-    dispatch(incrementPage());
-    return results;
-  }
-  async function onSubmit() {
+  const onSubmit = useCallback(async() => {
     dispatch(newSearch());
-    let results: IResponseData = await fetchData();
+    let results: IResponseData = await callAPI(searchInput);
     if (!results.totalHits) {
       dispatch(setError(
         `Sorry, we couldn't find any images of ${searchInput}.`
@@ -50,8 +39,8 @@ export default function HomeScreen(): React.ReactElement {
       dispatch(setError(``));
       dispatch(setImages(results.hits));
     }
-  }
-  console.log('rendering home')
+  }, [dispatch, searchInput]);
+
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.searchContainer}>

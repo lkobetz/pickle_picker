@@ -11,6 +11,7 @@ export const INCREMENT_PAGE = "INCREMENT_PAGE";
 export const SET_COLUMNS = "SET_COLUMNS";
 export const SET_SCROLL_ROW_GOAL = "SET_SCROLL_ROW_GOAL";
 export const FINISHED_LOADING_IMAGES = "FINISHED_LOADING_IMAGES";
+export const LAST_PAGE_FETCHED = "LAST_PAGE_FETCHED"
 
 export const setPerPage = (num: number) => {
   return {
@@ -85,3 +86,10 @@ export const finishedLoadingImages = () => {
     type: FINISHED_LOADING_IMAGES,
   };
 };
+
+export const setLastPageFetched = (lastPageFetched: number) => {
+  return {
+    type: LAST_PAGE_FETCHED,
+    lastPageFetched,
+  }
+}

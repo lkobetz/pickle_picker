@@ -10,6 +10,7 @@ import {
     SET_COLUMNS,
     SET_SCROLL_ROW_GOAL,
     FINISHED_LOADING_IMAGES,
+    LAST_PAGE_FETCHED,
   } from "./actions";
 
   import { IItem } from "@/types/types";
@@ -26,6 +27,7 @@ import {
     scrollRowGoal: number,
     allImagesLoaded: boolean,
     perPage: number,
+    lastPageFetched: number,
   }
   
   const initialState: IState = {
@@ -40,6 +42,7 @@ import {
     scrollRowGoal: 0,
     allImagesLoaded: false,
     perPage: 50,
+    lastPageFetched: 0,
   };
   
   // reducer:
@@ -108,6 +111,11 @@ import {
         return {
           ...state,
           allImagesLoaded: true,
+        };
+      case LAST_PAGE_FETCHED:
+        return {
+          ...state,
+          lastPageFetched: action.lastPageFetched,
         };
       default:
         return state;
