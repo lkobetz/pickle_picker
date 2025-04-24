@@ -1,24 +1,15 @@
 import { IDimensions, IItem } from '@/types/types'
 
-export const SET_PER_PAGE = "SET_PER_PAGE";
 export const SET_TOTAL = "SET_TOTAL";
 export const SET_ERROR = "SET_ERROR";
 export const SET_IMAGES = "SET_IMAGES";
 export const NEW_SEARCH = "NEW_SEARCH";
 export const SET_WINDOW_DIMENSIONS = "SET_WINDOW_DIMENSIONS";
-export const SET_SCROLL_ROW = "SET_SCROLL_ROW";
 export const INCREMENT_PAGE = "INCREMENT_PAGE";
 export const SET_COLUMNS = "SET_COLUMNS";
-export const SET_SCROLL_ROW_GOAL = "SET_SCROLL_ROW_GOAL";
-export const FINISHED_LOADING_IMAGES = "FINISHED_LOADING_IMAGES";
 export const LAST_PAGE_FETCHED = "LAST_PAGE_FETCHED"
-
-export const setPerPage = (num: number) => {
-  return {
-    type: SET_PER_PAGE,
-    num,
-  };
-};
+export const SELECTED_IMAGE = "SELECTED_IMAGE";
+export const IMAGE_IDS = "IMAGE_IDS";
 
 export const setTotal = (total: number) => {
   return {
@@ -54,13 +45,6 @@ export const setWindowDimensions = (dimensions: IDimensions) => {
   };
 };
 
-export const setScrollRow = (newPosition: number) => {
-  return {
-    type: SET_SCROLL_ROW,
-    newPosition,
-  };
-};
-
 export const setColumns = (columns: number) => {
   return {
     type: SET_COLUMNS,
@@ -74,22 +58,23 @@ export const incrementPage = () => {
   };
 };
 
-export const setScrollRowGoal = (row: number) => {
-  return {
-    type: SET_SCROLL_ROW_GOAL,
-    row,
-  };
-};
-
-export const finishedLoadingImages = () => {
-  return {
-    type: FINISHED_LOADING_IMAGES,
-  };
-};
-
 export const setLastPageFetched = (lastPageFetched: number) => {
   return {
     type: LAST_PAGE_FETCHED,
     lastPageFetched,
-  }
-}
+  };
+};
+
+export const setSelectedImage = (selectedImage: IItem) => {
+  return {
+    type: SELECTED_IMAGE,
+    selectedImage,
+  };
+};
+
+export const addImageIds = (imageIds: Record<string, string>) => {
+  return {
+    type: IMAGE_IDS,
+    imageIds,
+  };
+};

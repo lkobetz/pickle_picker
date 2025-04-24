@@ -10,16 +10,15 @@ import { initialResponseData } from "@/types/types";
 export const useCallAPI = () => {
   const dispatch = useDispatch();
 
-  const callAPI = useCallback(async (input: string, perPage: number = 50) => {
+  const callAPI = useCallback(async (input: string) => {
     const page = store.getState().page;
     const lastPageFetched = store.getState().lastPageFetched;
       if (lastPageFetched < page) {
         try {
-          console.log('fetching page:', page);
           dispatch(setLastPageFetched(page));
           dispatch(incrementPage());
           const results = await axios.get(
-            `https://pixabay.com/api/?key=${apiKey}&q=${input}&image_type=photo&page=${page}&per_page=${perPage}`
+            `https://pixabay.com/api/?key=${apiKey}&q=${input}&image_type=photo&page=${page}&per_page=100`
           );
           return results?.data;
         } catch (err: any) {

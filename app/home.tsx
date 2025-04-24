@@ -55,7 +55,6 @@ export default function HomeScreen(): React.ReactElement {
         </View>
         {!error && total > 0 ? (
           <ImagesLayout
-            // navigation={props.navigation}
             searchInput={searchInput}
           />
         ) : (

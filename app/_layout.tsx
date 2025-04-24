@@ -6,7 +6,7 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
         <Stack>
-            {/* <Stack.Screen name="(blah)"/> */}
+            <Stack.Screen name="single_image"/>
         </Stack>
     </Provider>
   );

@@ -2,6 +2,10 @@ export interface IItem {
     id: number
     previewURL: string
     largeImageURL: string
+    user: string
+    tags: string
+    imageWidth: number
+    imageHeight: number
 }
 
 export interface IResponseData {
