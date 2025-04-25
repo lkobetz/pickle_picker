@@ -2,8 +2,8 @@ import { useRouter } from "expo-router";
 import React, { PropsWithChildren } from "react";
 import { Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import { IItem } from "@/types/types";
 import { setSelectedImage } from "@/store/actions";
+import { IItem } from "@/types/types";
 
 export default function ImagePreview({ item }: PropsWithChildren & { item: IItem }): React.ReactElement {
   const router = useRouter();

@@ -1,10 +1,8 @@
-import { IDimensions, IItem } from '@/types/types'
+import { IItem } from '@/types/types'
 
 export const SET_TOTAL = "SET_TOTAL";
-export const SET_ERROR = "SET_ERROR";
 export const SET_IMAGES = "SET_IMAGES";
 export const NEW_SEARCH = "NEW_SEARCH";
-export const SET_WINDOW_DIMENSIONS = "SET_WINDOW_DIMENSIONS";
 export const INCREMENT_PAGE = "INCREMENT_PAGE";
 export const SET_COLUMNS = "SET_COLUMNS";
 export const LAST_PAGE_FETCHED = "LAST_PAGE_FETCHED"
@@ -18,13 +16,6 @@ export const setTotal = (total: number) => {
   };
 };
 
-export const setError = (message: string) => {
-  return {
-    type: SET_ERROR,
-    message,
-  };
-};
-
 export const setImages = (images: IItem[]) => {
   return {
     type: SET_IMAGES,
@@ -35,13 +26,6 @@ export const setImages = (images: IItem[]) => {
 export const newSearch = () => {
   return {
     type: NEW_SEARCH,
-  };
-};
-
-export const setWindowDimensions = (dimensions: IDimensions) => {
-  return {
-    type: SET_WINDOW_DIMENSIONS,
-    dimensions,
   };
 };
 

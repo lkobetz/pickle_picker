@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,37 +8,47 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { useCallAPI } from "@/api/call";
+import ImagesLayout from "@/app/components/ImagesLayout";
 import {
   setTotal,
-  setError,
   setImages,
   newSearch,
 } from "@/store/actions";
-import ImagesLayout from "@/app/components/ImagesLayout";
-import { useCallAPI } from "@/api/call";
-import { IResponseData } from "../types/types";
-import { IState } from "../store/reducer";
+import { IState } from "@/store/reducer";
+import { IResponseData } from "@/types/types";
 
 export default function HomeScreen(): React.ReactElement {
   const [searchInput, setSearchInput] = useState<string>('');
-  const error = useSelector((state: IState) => state.error);
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const total = useSelector((state: IState) => state.total);
   const dispatch = useDispatch();
   const { callAPI } = useCallAPI()
 
   const onSubmit = useCallback(async() => {
+    setError('');
+    setLoading(true);
     dispatch(newSearch());
     let results: IResponseData = await callAPI(searchInput);
     if (!results.totalHits) {
-      dispatch(setError(
+      setError(
         `Sorry, we couldn't find any images of ${searchInput}.`
-      ));
+      );
+      setLoading(false);
     } else {
       dispatch(setTotal(results.totalHits));
-      dispatch(setError(``));
+      setError(``);
       dispatch(setImages(results.hits));
     }
   }, [dispatch, searchInput]);
+
+  useEffect(() => {
+    if (total > 0) {
+      setLoading(false);
+    }
+  }, [total]);
 
     return (
       <SafeAreaView style={styles.container}>
@@ -53,12 +62,12 @@ export default function HomeScreen(): React.ReactElement {
             <Text>Search</Text>
           </TouchableOpacity>
         </View>
-        {!error && total > 0 ? (
+        {loading && <Text style={styles.infoText}>Loading...</Text>}
+        {!!error && <Text style={styles.infoText}>{error}</Text>}
+        {!error && total > 0 && !loading && (
           <ImagesLayout
             searchInput={searchInput}
           />
-        ) : (
-          <Text style={styles.error}>{error}</Text>
         )}
       </SafeAreaView>
     );
@@ -89,8 +98,9 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
     marginHorizontal: 10,
   },
-  error: {
+  infoText: {
     alignSelf: "center",
     margin: 5,
+    fontSize: 16,
   },
 });

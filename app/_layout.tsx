@@ -6,6 +6,7 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
         <Stack>
+            <Stack.Screen name="index" options={{ title: 'Picture Picker' }}/>
             <Stack.Screen name="single_image"/>
         </Stack>
     </Provider>

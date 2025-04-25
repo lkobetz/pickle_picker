@@ -1,5 +1,5 @@
-import { useCallback } from "react";
 import axios from "axios";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import apiKey from "@/secrets";
 import { incrementPage, setLastPageFetched } from "@/store/actions";

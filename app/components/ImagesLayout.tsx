@@ -1,24 +1,22 @@
+import _throttle from "lodash.throttle";
 import React, { useCallback, useRef } from "react";
 import { FlatList, StyleSheet, Dimensions } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import _throttle from "lodash.throttle";
-import ImagePreview from "@/app/components/ImagePreview";
 import { useCallAPI } from "@/api/call";
+import ImagePreview from "@/app/components/ImagePreview";
 import {
   setImages,
-  setWindowDimensions,
   setColumns,
   addImageIds,
 } from "@/store/actions";
+import { IState } from "@/store/reducer";
 import { IItem, IResponseData } from "@/types/types";
-import { IState } from "../../store/reducer";
 
 interface InheritedProps {
     searchInput: string
 }
 
-export default function AllImages(props: InheritedProps): React.ReactElement {
-    const stateWidth = useSelector((state: IState) => state.width);
+export default function ImagesLayout(props: InheritedProps): React.ReactElement {
     const columns = useSelector((state: IState) => state.columns);
     const total = useSelector((state: IState) => state.total);
     const stateImages = useSelector((state: IState) => state.images);
@@ -39,15 +37,9 @@ export default function AllImages(props: InheritedProps): React.ReactElement {
   }, []);
 
   const onLayout = useCallback(() => {
-    const oldWidth = stateWidth;
-    const { width, height } = Dimensions.get("window");
-    dispatch(setWindowDimensions({ width, height }));
-    // if this condition is true, device orientation has changed
-    if (oldWidth !== width) {
-      // calculate new number of columns based on new width
-      const cols: number = Math.floor(width / 100);
-      dispatch(setColumns(cols));
-    }
+    const { width } = Dimensions.get("window");
+    const cols: number = Math.floor(width / 100);
+    dispatch(setColumns(cols));
   }, []);
 
   const flatList: React.RefObject<FlatList> = useRef(null);
