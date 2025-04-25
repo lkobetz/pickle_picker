@@ -12,7 +12,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 2. Get API Key
 
-   This app uses the pixabay API. For local development, you'll need to obtain an API key from [pixabay](https://pixabay.com/api/docs/)
+   This app uses the pixabay API. For local development, you'll need to obtain an API key from [pixabay](https://pixabay.com/api/docs/).
    Create a file in the project root directory called `secrets.ts` and add the following to it:
    ```
    export default apiKey = "your_api_key";
