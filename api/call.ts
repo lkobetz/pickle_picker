@@ -23,9 +23,9 @@ export const useCallAPI = () => {
           return results?.data;
         } catch (err: any) {
           if (err?.request) {
-            console.log(err.request.response);
+            console.error(err.request.response);
           } else {
-            console.log(err);
+            console.error(err);
           }
         }
       }
